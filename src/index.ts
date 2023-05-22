@@ -6,8 +6,9 @@ const { ToadScheduler, SimpleIntervalJob, Task } = require("toad-scheduler");
 import bodyParser from "body-parser";
 const morgan = require("morgan");
 
-import { getWorkStatus, keepAwake } from "./modules";
+import { getWorkStatus, keepAwake, setLink } from "./modules";
 import { CONSTANTS, initRedisClient } from "./configurations";
+import { verification, checkSetLink } from "./middleware";
 
 // // scheduler
 // const scheduler = new ToadScheduler();
@@ -26,6 +27,9 @@ app.use(morgan("dev")); // logger
 
 // GET
 app.get("/status", getWorkStatus);
+
+// POST
+app.post("/setLink", verification, checkSetLink, setLink);
 
 // init redis
 initRedisClient();
