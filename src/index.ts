@@ -7,7 +7,13 @@ import bodyParser from "body-parser";
 const morgan = require("morgan");
 const responseTime = require("response-time");
 
-import { getWorkStatus, keepAwake, setLink, deleteLink } from "./modules";
+import {
+  getWorkStatus,
+  keepAwake,
+  setLink,
+  deleteLink,
+  getLinks,
+} from "./modules";
 import { CONSTANTS, initRedisClient } from "./configurations";
 import { verification, checkLink } from "./middleware";
 
@@ -29,6 +35,7 @@ app.use(responseTime({ header: "work-time" })); // ms in header
 
 // GET
 app.get("/status", getWorkStatus);
+app.get("/getLinks", verification, getLinks);
 
 // POST
 app.post("/setLink", verification, checkLink, setLink);
