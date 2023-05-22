@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 9987;
 const { ToadScheduler, SimpleIntervalJob, Task } = require("toad-scheduler");
 import bodyParser from "body-parser";
 const morgan = require("morgan");
+const responseTime = require("response-time");
 
 import { getWorkStatus, keepAwake, setLink, deleteLink } from "./modules";
 import { CONSTANTS, initRedisClient } from "./configurations";
@@ -24,6 +25,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("dev")); // logger
+app.use(responseTime({ header: "work-time" })); // ms in header
 
 // GET
 app.get("/status", getWorkStatus);
