@@ -14,17 +14,18 @@ import {
   deleteLink,
   getLinks,
 } from "./modules";
-import { CONSTANTS, initRedisClient } from "./configurations";
+import { CONSTANTS, initBitbucket, initRedisClient } from "./configurations";
 import { verification, checkLink } from "./middleware";
 
-// // scheduler
-// const scheduler = new ToadScheduler();
-// const keepAwakeTask = new Task("keep awake", () => keepAwake());
-// const keepAwakeJob = new SimpleIntervalJob(
-//   { minutes: CONSTANTS.UPDATE_TIME },
-//   keepAwakeTask
-// );
-// scheduler.addSimpleIntervalJob(keepAwakeJob);
+// scheduler
+const scheduler = new ToadScheduler();
+const keepAwakeTask = new Task("keep awake", () => keepAwake());
+const keepAwakeJob = new SimpleIntervalJob(
+  // { minutes: CONSTANTS.UPDATE_TIME },
+  { seconds: CONSTANTS.UPDATE_TIME },
+  keepAwakeTask
+);
+scheduler.addSimpleIntervalJob(keepAwakeJob);
 
 // configuration
 app.use(cors());
@@ -43,6 +44,8 @@ app.post("/deleteLink", verification, checkLink, deleteLink);
 
 // init redis
 initRedisClient();
+// init bitbucket
+initBitbucket();
 
 // listener
 app.listen(PORT, (): void => {
