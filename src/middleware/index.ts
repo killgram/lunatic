@@ -1,2 +1,2 @@
 export { verification } from "./Verification";
-export { checkSetLink } from "./CheckSetLink";
+export { checkLink } from "./CheckSetLink";

@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express";
 interface IBody {
   link?: string;
 }
-const checkSetLink = (
+const checkLink = (
   req: Request<{}, {}, IBody>,
   res: Response,
   next: NextFunction
@@ -19,4 +19,4 @@ const checkSetLink = (
   }
 };
 
-export { checkSetLink };
+export { checkLink };
