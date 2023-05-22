@@ -3,5 +3,6 @@ import { keepAwake } from "./KeepAwake";
 import { setLink } from "./SetLink";
 import { deleteLink } from "./DeleteLink";
 import { getLinks } from "./GetLinks";
+import { uploadLogs } from "./UploadLogs";
 
-export { getWorkStatus, keepAwake, setLink, deleteLink, getLinks };
+export { getWorkStatus, keepAwake, setLink, deleteLink, getLinks, uploadLogs };

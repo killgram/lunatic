@@ -8,6 +8,7 @@ const initBitbucket = async () => {
     email: CONSTANTS.BITBUCKET_USER,
     password: CONSTANTS.BITBUCKET_PASS,
   }).ready;
+  console.log("bitbucket is ready");
 };
 
 export { initBitbucket, bitbucketClient };

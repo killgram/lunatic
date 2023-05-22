@@ -13,19 +13,29 @@ import {
   setLink,
   deleteLink,
   getLinks,
+  uploadLogs,
 } from "./modules";
 import { CONSTANTS, initBitbucket, initRedisClient } from "./configurations";
 import { verification, checkLink } from "./middleware";
 
 // scheduler
 const scheduler = new ToadScheduler();
-const keepAwakeTask = new Task("keep awake", () => keepAwake());
-const keepAwakeJob = new SimpleIntervalJob(
-  // { minutes: CONSTANTS.UPDATE_TIME },
-  { seconds: CONSTANTS.UPDATE_TIME },
-  keepAwakeTask
+
+// const keepAwakeTask = new Task("keep awake", () => keepAwake());
+// const keepAwakeJob = new SimpleIntervalJob(
+//   // { minutes: CONSTANTS.UPDATE_TIME },
+//   { seconds: CONSTANTS.UPDATE_TIME * 2 },
+//   keepAwakeTask
+// );
+// scheduler.addSimpleIntervalJob(keepAwakeJob);
+
+const uploadLogsTask = new Task("upload logs", () => uploadLogs());
+const uploadLogsJob = new SimpleIntervalJob(
+  // { minutes: CONSTANTS.UPLOAD_UPDATE_TIME },
+  { seconds: 2 },
+  uploadLogsTask
 );
-scheduler.addSimpleIntervalJob(keepAwakeJob);
+scheduler.addSimpleIntervalJob(uploadLogsJob);
 
 // configuration
 app.use(cors());
