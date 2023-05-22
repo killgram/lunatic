@@ -4,5 +4,16 @@ import { setLink } from "./SetLink";
 import { deleteLink } from "./DeleteLink";
 import { getLinks } from "./GetLinks";
 import { uploadLogs } from "./UploadLogs";
+import { getLogs } from "./GetLogs";
+import { getLogsFile } from "./GetLogsFile";
 
-export { getWorkStatus, keepAwake, setLink, deleteLink, getLinks, uploadLogs };
+export {
+  getWorkStatus,
+  keepAwake,
+  setLink,
+  deleteLink,
+  getLinks,
+  uploadLogs,
+  getLogs,
+  getLogsFile,
+};

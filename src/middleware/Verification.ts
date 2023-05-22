@@ -1,7 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { CONSTANTS } from "../configurations";
 
-const verification = (req: Request, res: Response, next: NextFunction) => {
+const verification = <Body, Query>(
+  req: Request<{}, {}, Body, Query>,
+  res: Response,
+  next: NextFunction
+) => {
   const authHeader = req.headers.authorization;
 
   if (authHeader) {

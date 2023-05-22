@@ -14,9 +14,19 @@ import {
   deleteLink,
   getLinks,
   uploadLogs,
+  getLogs,
+  getLogsFile,
 } from "./modules";
 import { CONSTANTS, initBitbucket, initRedisClient } from "./configurations";
-import { verification, checkLink } from "./middleware";
+import {
+  verification,
+  checkLink,
+  checkLogs,
+  ICheckLinkBody,
+  ICheckLogsBody,
+  ICheckLogsFileBody,
+  checkLogsFile,
+} from "./middleware";
 
 // scheduler
 const scheduler = new ToadScheduler();
@@ -28,14 +38,14 @@ const scheduler = new ToadScheduler();
 //   keepAwakeTask
 // );
 // scheduler.addSimpleIntervalJob(keepAwakeJob);
-
-const uploadLogsTask = new Task("upload logs", () => uploadLogs());
-const uploadLogsJob = new SimpleIntervalJob(
-  // { minutes: CONSTANTS.UPLOAD_UPDATE_TIME },
-  { seconds: 2 },
-  uploadLogsTask
-);
-scheduler.addSimpleIntervalJob(uploadLogsJob);
+//
+// const uploadLogsTask = new Task("upload logs", () => uploadLogs());
+// const uploadLogsJob = new SimpleIntervalJob(
+//   // { minutes: CONSTANTS.UPLOAD_UPDATE_TIME },
+//   { seconds: 7 },
+//   uploadLogsTask
+// );
+// scheduler.addSimpleIntervalJob(uploadLogsJob);
 
 // configuration
 app.use(cors());
@@ -46,11 +56,23 @@ app.use(responseTime({ header: "work-time" })); // ms in header
 
 // GET
 app.get("/status", getWorkStatus);
-app.get("/getLinks", verification, getLinks);
+app.get("/getLinks", verification<{}, {}>, getLinks);
+app.get("/getLogs", verification<{}, ICheckLogsBody>, checkLogs, getLogs);
+app.get(
+  "/getLogsFile",
+  verification<{}, ICheckLogsFileBody>,
+  checkLogsFile,
+  getLogsFile
+);
 
 // POST
-app.post("/setLink", verification, checkLink, setLink);
-app.post("/deleteLink", verification, checkLink, deleteLink);
+app.post("/setLink", verification<ICheckLinkBody, {}>, checkLink, setLink);
+app.post(
+  "/deleteLink",
+  verification<ICheckLinkBody, {}>,
+  checkLink,
+  deleteLink
+);
 
 // init redis
 initRedisClient();

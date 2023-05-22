@@ -1,15 +1,15 @@
 import { Request, Response, NextFunction } from "express";
 
-export interface ICheckLinkBody {
-  link: string;
+export interface ICheckLogsFileBody {
+  file: string;
 }
-const checkLink = (
-  req: Request<{}, {}, ICheckLinkBody>,
+const checkLogsFile = (
+  req: Request<{}, {}, {}, ICheckLogsFileBody>,
   res: Response,
   next: NextFunction
 ) => {
-  const { link }: ICheckLinkBody = req.body;
-  if (!link) {
+  const { file }: ICheckLogsFileBody = req.query;
+  if (!file) {
     return res.status(401).send({
       title: "missing query params",
       success: false,
@@ -19,4 +19,4 @@ const checkLink = (
   }
 };
 
-export { checkLink };
+export { checkLogsFile };
