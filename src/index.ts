@@ -73,9 +73,9 @@ app.post(
 );
 
 // init redis
-initRedisClient();
+initRedisClient().then((_) => {});
 // init bitbucket
-initBitbucket();
+initBitbucket().then((_) => {});
 
 // listener
 app.listen(PORT, (): void => {
