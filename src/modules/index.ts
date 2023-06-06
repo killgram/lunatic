@@ -6,6 +6,7 @@ import { getLinks } from "./GetLinks";
 import { uploadLogs } from "./UploadLogs";
 import { getLogs } from "./GetLogs";
 import { getLogsFile } from "./GetLogsFile";
+import { getDBLogs } from "./GetDBLogs";
 
 export {
   getWorkStatus,
@@ -16,4 +17,5 @@ export {
   uploadLogs,
   getLogs,
   getLogsFile,
+  getDBLogs,
 };

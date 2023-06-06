@@ -41,6 +41,12 @@ The following technologies and libraries were used in the development:
 | `year`          | `string` | **Required**. Chose year           |
 | `Authorization` | `Bearer` | **Required**. Header, access token |
 
+> `/getDBLogs`
+
+| Parameter       | Type     | Description                        |
+|:----------------|:---------|:-----------------------------------|
+| `Authorization` | `Bearer` | **Required**. Header, access token |
+
 > `/getLogsFile`
 
 | Parameter       | Type     | Description                        |

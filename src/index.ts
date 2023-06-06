@@ -16,6 +16,7 @@ import {
   uploadLogs,
   getLogs,
   getLogsFile,
+  getDBLogs,
 } from "./modules";
 import { CONSTANTS, initBitbucket, initRedisClient } from "./configurations";
 import {
@@ -29,21 +30,21 @@ import {
 } from "./middleware";
 
 // scheduler
-const scheduler = new ToadScheduler();
-
-const keepAwakeTask = new Task("keep awake", () => keepAwake());
-const keepAwakeJob = new SimpleIntervalJob(
-  { minutes: CONSTANTS.UPDATE_TIME },
-  keepAwakeTask
-);
-scheduler.addSimpleIntervalJob(keepAwakeJob);
-
-const uploadLogsTask = new Task("upload logs", () => uploadLogs());
-const uploadLogsJob = new SimpleIntervalJob(
-  { minutes: CONSTANTS.UPLOAD_UPDATE_TIME * 24 },
-  uploadLogsTask
-);
-scheduler.addSimpleIntervalJob(uploadLogsJob);
+// const scheduler = new ToadScheduler();
+//
+// const keepAwakeTask = new Task("keep awake", () => keepAwake());
+// const keepAwakeJob = new SimpleIntervalJob(
+//   { minutes: CONSTANTS.UPDATE_TIME },
+//   keepAwakeTask
+// );
+// scheduler.addSimpleIntervalJob(keepAwakeJob);
+//
+// const uploadLogsTask = new Task("upload logs", () => uploadLogs());
+// const uploadLogsJob = new SimpleIntervalJob(
+//   { minutes: CONSTANTS.UPLOAD_UPDATE_TIME * 24 },
+//   uploadLogsTask
+// );
+// scheduler.addSimpleIntervalJob(uploadLogsJob);
 
 // configuration
 app.use(cors());
@@ -55,6 +56,7 @@ app.use(responseTime({ header: "work-time" })); // ms in header
 // GET
 app.get("/status", getWorkStatus);
 app.get("/getLinks", verification<{}, {}>, getLinks);
+app.get("/getDBLogs", verification<{}, {}>, getDBLogs);
 app.get("/getLogs", verification<{}, ICheckLogsBody>, checkLogs, getLogs);
 app.get(
   "/getLogsFile",
