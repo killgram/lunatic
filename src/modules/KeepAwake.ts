@@ -1,7 +1,7 @@
 import { client, CONSTANTS } from "../configurations";
 import { wakeUpService, setupLogService } from "../services";
 
-interface IResult {
+export interface IResult {
   url: string;
   date: Date;
   status: boolean;

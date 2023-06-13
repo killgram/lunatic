@@ -133,3 +133,4 @@ dist
 package-lock.json
 .idea
 src/configurations/Constants.ts
+src/configurations/WebhookConfig.ts

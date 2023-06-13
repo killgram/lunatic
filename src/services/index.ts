@@ -1,4 +1,5 @@
 import { wakeUpService } from "./WakeUpService";
 import { setupLogService } from "./SetupLogService";
+import { notificationLogService } from "./NotificationLogService";
 
-export { wakeUpService, setupLogService };
+export { wakeUpService, setupLogService, notificationLogService };
