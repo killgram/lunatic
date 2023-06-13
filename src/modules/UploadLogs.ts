@@ -1,5 +1,4 @@
 import { client, CONSTANTS } from "../configurations";
-import { bitbucketUpload } from "../services";
 
 const uploadLogs = async () => {
   const data: string[] = await client.lRange(CONSTANTS.LOG_TABLE, 0, -1);
@@ -15,7 +14,6 @@ const uploadLogs = async () => {
   const dbString: string = `${cDay}_${cMonth}_${cYear}/${cHours}:${cMinutes}:${cSeconds}:${cMilliseconds}`;
 
   try {
-    await bitbucketUpload(dbString, JSON.stringify(data));
     await client.lTrim(CONSTANTS.LOG_TABLE, 99, 0);
   } catch (e) {
     console.log("__LOGS_Error_Upload__");
