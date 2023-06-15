@@ -47,13 +47,6 @@ The following technologies and libraries were used in the development:
 |:----------------|:---------|:-----------------------------------|
 | `Authorization` | `Bearer` | **Required**. Header, access token |
 
-> `/getLogsFile`
-
-| Parameter       | Type     | Description                        |
-|:----------------|:---------|:-----------------------------------|
-| `file`          | `string` | **Required**. Chose file           |
-| `Authorization` | `Bearer` | **Required**. Header, access token |
-
 #### POST
 
 > `/setLink`

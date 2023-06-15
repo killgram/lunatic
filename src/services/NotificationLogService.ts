@@ -34,12 +34,14 @@ const notificationLogService = async (data: any) => {
   ];
 
   data?.forEach((v: any) => {
-    if (v?.error) {
-      fields.push({
-        name: errorTitle,
-        value: v?.url,
-      });
-    }
+    JSON.parse(v)?.forEach((a: any) => {
+      if (a?.error) {
+        fields.push({
+          name: errorTitle,
+          value: a?.url,
+        });
+      }
+    });
   });
 
   if (fields.length === 1) {
